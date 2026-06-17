@@ -1,0 +1,145 @@
+-- Create Fact Table
+CREATE TABLE Fact_Restaurant_Sales (
+    Fact_ID INT IDENTITY(1,1) PRIMARY KEY,
+    
+    -- Foreign Keys to Dimension Tables
+    Date_ID INT,
+    Time_ID INT,
+    Branch_ID NVARCHAR(50),
+    Dim_Customer_ID INT,
+    Driver_ID NVARCHAR(50),
+    Employee_ID NVARCHAR(50),
+    Weather_ID INT,
+    Competitor_ID INT,
+    
+    -- Fact Measures/Metrics
+    Order_ID NVARCHAR(50),
+    Total_Sales_Amount DECIMAL(10,2),
+    Number_of_Items INT,
+    Delivery_Time_Minutes INT,
+    Customer_Rating DECIMAL(3,2),
+    Discount_Amount DECIMAL(10,2),
+    Tax_Amount DECIMAL(10,2),
+    Delivery_Fee DECIMAL(10,2),
+    Food_Cost DECIMAL(10,2),
+    Profit_Amount DECIMAL(10,2),
+    
+    -- Foreign Key Constraints
+    FOREIGN KEY (Date_ID) REFERENCES Dim_Date(Date_ID),
+    FOREIGN KEY (Time_ID) REFERENCES Dim_Time(Time_ID),
+    FOREIGN KEY (Branch_ID) REFERENCES Dim_Branch(Branch_ID),
+    FOREIGN KEY (Dim_Customer_ID) REFERENCES Dim_Customer(Dim_Customer_ID),
+    FOREIGN KEY (Driver_ID) REFERENCES Dim_Driver(Driver_ID),
+    FOREIGN KEY (Employee_ID) REFERENCES Dim_Employee(Employee_ID),
+    FOREIGN KEY (Weather_ID) REFERENCES Dim_Weather(Weather_ID),
+    FOREIGN KEY (Competitor_ID) REFERENCES Dim_Competitor(Competitor_ID)
+);
+
+-- Sample INSERT Query to populate Fact Table
+INSERT INTO Fact_Restaurant_Sales (
+    Date_ID, Time_ID, Branch_ID, Dim_Customer_ID, Driver_ID, Employee_ID,
+    Weather_ID, Competitor_ID, Order_ID, Total_Sales_Amount, Number_of_Items,
+    Delivery_Time_Minutes, Customer_Rating, Discount_Amount, Tax_Amount,
+    Delivery_Fee, Food_Cost, Profit_Amount
+)
+SELECT 
+    dd.Date_ID,
+    dt.Time_ID,
+    db.Branch_ID,
+    dc.Dim_Customer_ID,
+    ddr.Driver_ID,
+    de.Employee_ID,
+    dw.Weather_ID,
+    dcomp.Competitor_ID,
+    
+    -- Sample fact data (replace with actual source data)
+    'ORD' + CAST(ROW_NUMBER() OVER (ORDER BY dd.Date_ID) AS NVARCHAR(10)) AS Order_ID,
+    ROUND(RAND() * 100 + 20, 2) AS Total_Sales_Amount,  -- Random sales between $20-120
+    FLOOR(RAND() * 5 + 1) AS Number_of_Items,           -- 1-5 items
+    FLOOR(RAND() * 45 + 15) AS Delivery_Time_Minutes,   -- 15-60 minutes
+    ROUND(RAND() * 2 + 3, 1) AS Customer_Rating,        -- 3.0-5.0 rating
+    ROUND(RAND() * 10, 2) AS Discount_Amount,           -- $0-10 discount
+    ROUND((RAND() * 100 + 20) * 0.08, 2) AS Tax_Amount, -- 8% tax
+    3.99 AS Delivery_Fee,                               -- Standard delivery fee
+    ROUND((RAND() * 100 + 20) * 0.6, 2) AS Food_Cost,  -- 60% of sales as food cost
+    ROUND((RAND() * 100 + 20) * 0.25, 2) AS Profit_Amount -- 25% profit margin
+
+FROM Dim_Date dd
+CROSS JOIN Dim_Time dt
+CROSS JOIN Dim_Branch db
+CROSS JOIN Dim_Customer dc
+CROSS JOIN Dim_Driver ddr
+CROSS JOIN Dim_Employee de
+CROSS JOIN Dim_Weather dw
+CROSS JOIN Dim_Competitor dcomp
+WHERE dd.Date_ID <= 30  -- Limit to first 30 dates to avoid too many records
+  AND dt.Time_ID <= 24  -- Limit to first 24 time slots
+  AND RAND() > 0.95;    -- Only insert ~5% of possible combinations for realistic data volume
+
+-- Alternative: INSERT from staging/source table
+-- INSERT INTO Fact_Restaurant_Sales (...)
+-- SELECT 
+--     dd.Date_ID,
+--     dt.Time_ID,
+--     -- ... other dimensions
+--     s.Order_ID,
+--     s.Total_Sales_Amount,
+--     s.Number_of_Items
+--     -- ... other measures
+-- FROM Staging_Orders s
+-- JOIN Dim_Date dd ON s.Order_Date = dd.Date
+-- JOIN Dim_Time dt ON s.Order_Time = dt.Time
+-- JOIN Dim_Branch db ON s.Branch = db.Branch
+-- JOIN Dim_Customer dc ON s.Customer_ID = dc.Customer_ID
+-- JOIN Dim_Driver ddr ON s.Driver_ID = ddr.Driver_ID
+-- JOIN Dim_Employee de ON s.Employee_ID = de.Employee_ID
+-- JOIN Dim_Weather dw ON s.Weather = dw.Weather
+-- JOIN Dim_Competitor dcomp ON s.Competitor = dcomp.Competitor_Name;
+
+-- Sample Analytical Queries
+
+-- 1. Daily Sales Summary
+SELECT 
+    dd.Date,
+    dd.Weekday,
+    COUNT(*) as Total_Orders,
+    SUM(f.Total_Sales_Amount) as Daily_Revenue,
+    AVG(f.Customer_Rating) as Avg_Rating,
+    AVG(f.Delivery_Time_Minutes) as Avg_Delivery_Time
+FROM Fact_Restaurant_Sales f
+JOIN Dim_Date dd ON f.Date_ID = dd.Date_ID
+GROUP BY dd.Date, dd.Weekday
+ORDER BY dd.Date;
+
+-- 2. Branch Performance Analysis
+SELECT 
+    db.Branch,
+    COUNT(*) as Total_Orders,
+    SUM(f.Total_Sales_Amount) as Total_Revenue,
+    AVG(f.Profit_Amount) as Avg_Profit,
+    AVG(f.Customer_Rating) as Avg_Rating
+FROM Fact_Restaurant_Sales f
+JOIN Dim_Branch db ON f.Branch_ID = db.Branch_ID
+GROUP BY db.Branch
+ORDER BY Total_Revenue DESC;
+
+-- 3. Weather Impact Analysis
+SELECT 
+    dw.Weather,
+    COUNT(*) as Order_Count,
+    AVG(f.Total_Sales_Amount) as Avg_Order_Value,
+    AVG(f.Delivery_Time_Minutes) as Avg_Delivery_Time
+FROM Fact_Restaurant_Sales f
+JOIN Dim_Weather dw ON f.Weather_ID = dw.Weather_ID
+GROUP BY dw.Weather;
+
+-- 4. Driver Performance
+SELECT 
+    ddr.Driver_Name,
+    COUNT(*) as Total_Deliveries,
+    AVG(f.Delivery_Time_Minutes) as Avg_Delivery_Time,
+    AVG(f.Customer_Rating) as Avg_Rating
+FROM Fact_Restaurant_Sales f
+JOIN Dim_Driver ddr ON f.Driver_ID = ddr.Driver_ID
+GROUP BY ddr.Driver_Name
+ORDER BY Avg_Rating DESC;

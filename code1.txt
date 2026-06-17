@@ -1,0 +1,121 @@
+USE restaurant
+GO
+
+
+CREATE TABLE Restaurant (
+    Transaction_ID NVARCHAR(50) ,
+    Date DATE,
+    Time TIME,
+    Branch_ID NVARCHAR(50),
+    Branch NVARCHAR(50),
+    Items NVARCHAR(255),
+    Quantity INT,
+    Total_Amount FLOAT,
+    Payment_Type NVARCHAR(50),
+    Order_Type NVARCHAR(50),
+    Customer_ID NVARCHAR(50),
+    Loyalty_Program NVARCHAR(50),
+    Promotion_Used NVARCHAR(50),
+    Driver_ID NVARCHAR(50),
+    Driver_Name NVARCHAR(100),
+    Driver_Contact_Number NVARCHAR(50),
+    Delivery_Time_Minutes INT,
+    Delivery_Cost FLOAT,
+    Customer_Feedback INT,
+    Employee_ID NVARCHAR(50),
+    Shift NVARCHAR(50),
+    Hours_Worked INT,
+    Employee_Role NVARCHAR(50),
+    Average_Stock_Level INT,
+    Wastage INT,
+    Weather NVARCHAR(50),
+    Holiday_Event NVARCHAR(50),
+    Competitor_Name NVARCHAR(50),
+    Competitor_Price FLOAT,
+    Competitor_Promotion NVARCHAR(50),
+    Traffic_Level NVARCHAR(50),
+    Delivery_Address NVARCHAR(255),
+    Longitude FLOAT,
+    Latitude FLOAT
+);
+
+DROP TABLE IF EXISTS Restaurant;
+
+
+CREATE TABLE Date_Dim (
+    Date_ID INT IDENTITY(1,1) PRIMARY KEY,
+    Full_Date DATE NOT NULL,
+    Year INT,
+    Quarter INT,
+    Month INT,
+    Week INT,
+    Day INT
+);
+
+
+-- Dim_Date
+CREATE TABLE Dim_Date (
+    Date_ID INT IDENTITY(1,1) PRIMARY KEY,
+    Date DATE,
+    Day INT,
+    Month INT,
+    Year INT,
+    Weekday NVARCHAR(20)
+);
+
+-- Dim_Time
+CREATE TABLE Dim_Time (
+    Time_ID INT IDENTITY(1,1) PRIMARY KEY,
+    Time TIME,
+    Hour INT,
+    Minute INT
+);
+
+-- Dim_Branch
+CREATE TABLE Dim_Branch (
+    Branch_ID NVARCHAR(50) PRIMARY KEY,
+    Branch NVARCHAR(50)
+);
+
+-- Dim_Customer
+CREATE TABLE Dim_Customer (
+    Dim_Customer_ID INT IDENTITY(1,1) PRIMARY KEY,
+    Customer_ID NVARCHAR(50),
+    Loyalty_Program NVARCHAR(50),
+    Promotion_Used NVARCHAR(50)
+);
+
+-- Dim_Driver
+CREATE TABLE Dim_Driver (
+    Driver_ID NVARCHAR(50) PRIMARY KEY,
+    Driver_Name NVARCHAR(100),
+    Driver_Contact_Number NVARCHAR(50)
+);
+
+-- Dim_Employee
+CREATE TABLE Dim_Employee (
+    Employee_ID NVARCHAR(50),
+    Shift NVARCHAR(50),
+    Hours_Worked INT,
+    Employee_Role NVARCHAR(50),
+    PRIMARY KEY (Employee_ID, Shift, Employee_Role, Hours_Worked) -- Include Hours_Worked
+);
+
+
+-- Dim_Weather
+CREATE TABLE Dim_Weather (
+    Weather_ID INT IDENTITY(1,1) PRIMARY KEY,
+    Weather NVARCHAR(50),
+    Holiday_Event NVARCHAR(50),
+    Traffic_Level NVARCHAR(50)
+);
+
+-- Dim_Competitor
+CREATE TABLE Dim_Competitor (
+    Competitor_ID INT IDENTITY(1,1) PRIMARY KEY,
+    Competitor_Name NVARCHAR(50),
+    Competitor_Promotion NVARCHAR(50)
+);
+
+
+

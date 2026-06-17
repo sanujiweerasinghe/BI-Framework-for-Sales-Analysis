@@ -1,0 +1,54 @@
+-- Load Dim_Date
+INSERT INTO Dim_Date (Date, Day, Month, Year, Weekday)
+SELECT DISTINCT 
+    Date,
+    DAY(Date),
+    MONTH(Date),
+    YEAR(Date),
+    DATENAME(WEEKDAY, Date)
+FROM Restaurant;
+
+-- Load Dim_Time
+INSERT INTO Dim_Time (Time, Hour, Minute)
+SELECT DISTINCT 
+    Time,
+    DATEPART(HOUR, Time),
+    DATEPART(MINUTE, Time)
+FROM Restaurant;
+
+-- Load Dim_Branch
+INSERT INTO Dim_Branch (Branch_ID, Branch)
+SELECT DISTINCT Branch_ID, Branch
+FROM Restaurant;
+
+INSERT INTO Dim_Customer (Customer_ID, Loyalty_Program, Promotion_Used)
+SELECT Customer_ID, 
+       MAX(Loyalty_Program) as Loyalty_Program,
+       MAX(Promotion_Used) as Promotion_Used
+FROM Restaurant
+GROUP BY Customer_ID;
+
+-- Load Dim_Driver
+INSERT INTO Dim_Driver (Driver_ID, Driver_Name, Driver_Contact_Number)
+SELECT Driver_ID, 
+       MAX(Driver_Name) as Driver_Name,
+       MAX(Driver_Contact_Number) as Driver_Contact_Number
+FROM Restaurant
+GROUP BY Driver_ID;
+
+
+-- Load Dim_Employee
+INSERT INTO Dim_Employee (Employee_ID, Shift, Hours_Worked, Employee_Role)
+SELECT DISTINCT Employee_ID, Shift, Hours_Worked, Employee_Role
+FROM Restaurant;
+
+
+-- Load Dim_Weather
+INSERT INTO Dim_Weather (Weather, Holiday_Event, Traffic_Level)
+SELECT DISTINCT Weather, Holiday_Event, Traffic_Level
+FROM Restaurant;
+
+-- Load Dim_Competitor
+INSERT INTO Dim_Competitor (Competitor_Name, Competitor_Promotion)
+SELECT DISTINCT Competitor_Name, Competitor_Promotion
+FROM Restaurant;

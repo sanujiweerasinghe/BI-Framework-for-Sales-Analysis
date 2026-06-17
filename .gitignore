@@ -1,0 +1,12 @@
+# Visual Studio folders
+.vs/
+bin/
+obj/
+
+# Power BI
+*.pbix.template
+*.pbit
+
+# Tabular Editor / Visual Studio Tabular
+*.settings
+*.layout

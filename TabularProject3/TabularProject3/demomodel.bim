@@ -1,0 +1,885 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1200,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "name": "SqlServer DESKTOP-CIQS6BNDEMO restaurant",
+        "connectionString": "Provider=SQLOLEDB;Data Source=DESKTOP-CIQS6BN\\DEMO;Initial Catalog=restaurant;Integrated Security=SSPI;Persist Security Info=false",
+        "impersonationMode": "impersonateAccount",
+        "account": "desktop-ciqs6bn\\lenovo",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlServer"
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "Dim_Branch",
+        "columns": [
+          {
+            "name": "Branch_ID",
+            "dataType": "string",
+            "sourceColumn": "Branch_ID",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Branch",
+            "dataType": "string",
+            "sourceColumn": "Branch",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Dim_Branch",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[Dim_Branch].*   FROM [dbo].[Dim_Branch] ",
+              "dataSource": "SqlServer DESKTOP-CIQS6BNDEMO restaurant"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[Dim_Branch].*   FROM [dbo].[Dim_Branch] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Dim_Branch"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Dim_Competitor",
+        "columns": [
+          {
+            "name": "Competitor_ID",
+            "dataType": "int64",
+            "sourceColumn": "Competitor_ID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Competitor_Name",
+            "dataType": "string",
+            "sourceColumn": "Competitor_Name",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Competitor_Promotion",
+            "dataType": "string",
+            "sourceColumn": "Competitor_Promotion",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Dim_Competitor",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[Dim_Competitor].*   FROM [dbo].[Dim_Competitor] ",
+              "dataSource": "SqlServer DESKTOP-CIQS6BNDEMO restaurant"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[Dim_Competitor].*   FROM [dbo].[Dim_Competitor] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Dim_Competitor"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Dim_Customer",
+        "columns": [
+          {
+            "name": "Dim_Customer_ID",
+            "dataType": "int64",
+            "sourceColumn": "Dim_Customer_ID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Customer_ID",
+            "dataType": "string",
+            "sourceColumn": "Customer_ID",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Loyalty_Program",
+            "dataType": "string",
+            "sourceColumn": "Loyalty_Program",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Promotion_Used",
+            "dataType": "string",
+            "sourceColumn": "Promotion_Used",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Dim_Customer",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[Dim_Customer].*   FROM [dbo].[Dim_Customer] ",
+              "dataSource": "SqlServer DESKTOP-CIQS6BNDEMO restaurant"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[Dim_Customer].*   FROM [dbo].[Dim_Customer] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Dim_Customer"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Dim_Date",
+        "columns": [
+          {
+            "name": "Date_ID",
+            "dataType": "int64",
+            "sourceColumn": "Date_ID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Date",
+            "dataType": "string",
+            "sourceColumn": "Date",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Day",
+            "dataType": "int64",
+            "sourceColumn": "Day",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Month",
+            "dataType": "int64",
+            "sourceColumn": "Month",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Year",
+            "dataType": "int64",
+            "sourceColumn": "Year",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Weekday",
+            "dataType": "string",
+            "sourceColumn": "Weekday",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Dim_Date",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[Dim_Date].*   FROM [dbo].[Dim_Date] ",
+              "dataSource": "SqlServer DESKTOP-CIQS6BNDEMO restaurant"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[Dim_Date].*   FROM [dbo].[Dim_Date] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Dim_Date"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Dim_Driver",
+        "columns": [
+          {
+            "name": "Driver_ID",
+            "dataType": "string",
+            "sourceColumn": "Driver_ID",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Driver_Name",
+            "dataType": "string",
+            "sourceColumn": "Driver_Name",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Driver_Contact_Number",
+            "dataType": "string",
+            "sourceColumn": "Driver_Contact_Number",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Dim_Driver",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[Dim_Driver].*   FROM [dbo].[Dim_Driver] ",
+              "dataSource": "SqlServer DESKTOP-CIQS6BNDEMO restaurant"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[Dim_Driver].*   FROM [dbo].[Dim_Driver] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Dim_Driver"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Dim_Employee",
+        "columns": [
+          {
+            "name": "Employee_ID",
+            "dataType": "string",
+            "sourceColumn": "Employee_ID",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Shift",
+            "dataType": "string",
+            "sourceColumn": "Shift",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Hours_Worked",
+            "dataType": "int64",
+            "sourceColumn": "Hours_Worked",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Employee_Role",
+            "dataType": "string",
+            "sourceColumn": "Employee_Role",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Dim_Employee",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[Dim_Employee].*   FROM [dbo].[Dim_Employee] ",
+              "dataSource": "SqlServer DESKTOP-CIQS6BNDEMO restaurant"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[Dim_Employee].*   FROM [dbo].[Dim_Employee] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Dim_Employee"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Dim_Time",
+        "columns": [
+          {
+            "name": "Time_ID",
+            "dataType": "int64",
+            "sourceColumn": "Time_ID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Time",
+            "dataType": "string",
+            "sourceColumn": "Time",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Hour",
+            "dataType": "int64",
+            "sourceColumn": "Hour",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Minute",
+            "dataType": "int64",
+            "sourceColumn": "Minute",
+            "sourceProviderType": "Integer"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Dim_Time",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[Dim_Time].*   FROM [dbo].[Dim_Time] ",
+              "dataSource": "SqlServer DESKTOP-CIQS6BNDEMO restaurant"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[Dim_Time].*   FROM [dbo].[Dim_Time] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Dim_Time"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Dim_Weather",
+        "columns": [
+          {
+            "name": "Weather_ID",
+            "dataType": "int64",
+            "sourceColumn": "Weather_ID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Weather",
+            "dataType": "string",
+            "sourceColumn": "Weather",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Holiday_Event",
+            "dataType": "string",
+            "sourceColumn": "Holiday_Event",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Traffic_Level",
+            "dataType": "string",
+            "sourceColumn": "Traffic_Level",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Dim_Weather",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[Dim_Weather].*   FROM [dbo].[Dim_Weather] ",
+              "dataSource": "SqlServer DESKTOP-CIQS6BNDEMO restaurant"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[Dim_Weather].*   FROM [dbo].[Dim_Weather] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Dim_Weather"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Fact_Restaurant_Transactions",
+        "columns": [
+          {
+            "name": "Fact_ID",
+            "dataType": "int64",
+            "sourceColumn": "Fact_ID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Transaction_ID",
+            "dataType": "string",
+            "sourceColumn": "Transaction_ID",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Date_ID",
+            "dataType": "int64",
+            "sourceColumn": "Date_ID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Time_ID",
+            "dataType": "int64",
+            "sourceColumn": "Time_ID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Branch_ID",
+            "dataType": "string",
+            "sourceColumn": "Branch_ID",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Dim_Customer_ID",
+            "dataType": "int64",
+            "sourceColumn": "Dim_Customer_ID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Driver_ID",
+            "dataType": "string",
+            "sourceColumn": "Driver_ID",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Employee_ID",
+            "dataType": "string",
+            "sourceColumn": "Employee_ID",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Shift",
+            "dataType": "string",
+            "sourceColumn": "Shift",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Employee_Role",
+            "dataType": "string",
+            "sourceColumn": "Employee_Role",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Hours_Worked",
+            "dataType": "int64",
+            "sourceColumn": "Hours_Worked",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Weather_ID",
+            "dataType": "int64",
+            "sourceColumn": "Weather_ID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Competitor_ID",
+            "dataType": "int64",
+            "sourceColumn": "Competitor_ID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Items",
+            "dataType": "string",
+            "sourceColumn": "Items",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Quantity",
+            "dataType": "int64",
+            "sourceColumn": "Quantity",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Total_Amount",
+            "dataType": "double",
+            "sourceColumn": "Total_Amount",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "Payment_Type",
+            "dataType": "string",
+            "sourceColumn": "Payment_Type",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Order_Type",
+            "dataType": "string",
+            "sourceColumn": "Order_Type",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Delivery_Time_Minutes",
+            "dataType": "int64",
+            "sourceColumn": "Delivery_Time_Minutes",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Delivery_Cost",
+            "dataType": "double",
+            "sourceColumn": "Delivery_Cost",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "Customer_Feedback",
+            "dataType": "int64",
+            "sourceColumn": "Customer_Feedback",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Average_Stock_Level",
+            "dataType": "int64",
+            "sourceColumn": "Average_Stock_Level",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Wastage",
+            "dataType": "int64",
+            "sourceColumn": "Wastage",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Competitor_Price",
+            "dataType": "double",
+            "sourceColumn": "Competitor_Price",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "Delivery_Address",
+            "dataType": "string",
+            "sourceColumn": "Delivery_Address",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Longitude",
+            "dataType": "double",
+            "sourceColumn": "Longitude",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "Latitude",
+            "dataType": "double",
+            "sourceColumn": "Latitude",
+            "sourceProviderType": "Double"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Fact_Restaurant_Transactions",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[Fact_Restaurant_Transactions].*   FROM [dbo].[Fact_Restaurant_Transactions] ",
+              "dataSource": "SqlServer DESKTOP-CIQS6BNDEMO restaurant"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Total Sales Revenue",
+            "expression": [
+              "",
+              "SUM ( Fact_Restaurant_Transactions[Total_Amount] )"
+            ]
+          },
+          {
+            "name": "Total Items Sold",
+            "expression": [
+              "",
+              "SUM ( Fact_Restaurant_Transactions[Quantity] )"
+            ]
+          },
+          {
+            "name": "Average Order Value",
+            "expression": [
+              "",
+              "DIVIDE (",
+              "    [Total Sales Revenue],",
+              "    DISTINCTCOUNT ( Fact_Restaurant_Transactions[Transaction_ID] )",
+              ")"
+            ]
+          },
+          {
+            "name": "Number of Transactions",
+            "expression": [
+              "",
+              "DISTINCTCOUNT ( Fact_Restaurant_Transactions[Transaction_ID] )"
+            ]
+          },
+          {
+            "name": "Total Customers",
+            "expression": [
+              "",
+              "DISTINCTCOUNT ( Fact_Restaurant_Transactions[Dim_Customer_ID] )"
+            ]
+          },
+          {
+            "name": "Sales per Customer",
+            "expression": [
+              "",
+              "DIVIDE ( [Total Sales Revenue], [Total Customers] )"
+            ]
+          },
+          {
+            "name": "Average Customer Feedback",
+            "expression": [
+              "",
+              "AVERAGE ( Fact_Restaurant_Transactions[Customer_Feedback] )"
+            ]
+          },
+          {
+            "name": "Sales by Branch",
+            "expression": [
+              "",
+              "SUMX (",
+              "    Fact_Restaurant_Transactions,",
+              "    Fact_Restaurant_Transactions[Total_Amount]",
+              ")"
+            ]
+          },
+          {
+            "name": "Sales per Employee",
+            "expression": [
+              "",
+              "DIVIDE (",
+              "    [Total Sales Revenue],",
+              "    DISTINCTCOUNT ( Fact_Restaurant_Transactions[Employee_ID] )",
+              ")"
+            ]
+          },
+          {
+            "name": "Average Hours Worked",
+            "expression": [
+              "",
+              "AVERAGE ( Fact_Restaurant_Transactions[Hours_Worked] )"
+            ]
+          },
+          {
+            "name": "Sales per Hour Worked",
+            "expression": [
+              "",
+              "DIVIDE ( [Total Sales Revenue], SUM ( Fact_Restaurant_Transactions[Hours_Worked] ) )"
+            ]
+          },
+          {
+            "name": "Average Delivery Time",
+            "expression": [
+              "",
+              "AVERAGE ( Fact_Restaurant_Transactions[Delivery_Time_Minutes] )"
+            ]
+          },
+          {
+            "name": "Average Delivery Cost",
+            "expression": [
+              "",
+              "AVERAGE ( Fact_Restaurant_Transactions[Delivery_Cost] )"
+            ]
+          },
+          {
+            "name": "Total Delivery Cost",
+            "expression": [
+              "",
+              "SUM ( Fact_Restaurant_Transactions[Delivery_Cost] )"
+            ]
+          },
+          {
+            "name": "Total Wastage",
+            "expression": [
+              "",
+              "SUM ( Fact_Restaurant_Transactions[Wastage] )"
+            ]
+          },
+          {
+            "name": "Average Stock Level",
+            "expression": [
+              "",
+              "AVERAGE ( Fact_Restaurant_Transactions[Average_Stock_Level] )"
+            ]
+          },
+          {
+            "name": "Wastage Percentage",
+            "expression": [
+              "",
+              "DIVIDE ( [Total Wastage], [Total Items Sold], 0 )"
+            ]
+          },
+          {
+            "name": "Average Competitor Price",
+            "expression": [
+              "",
+              "AVERAGE ( Fact_Restaurant_Transactions[Competitor_Price] )"
+            ]
+          },
+          {
+            "name": "Price Difference",
+            "expression": [
+              "",
+              "[Average Order Value] - [Average Competitor Price]"
+            ]
+          },
+          {
+            "name": "-- Sales Today (converts text -> date)\nSales Today",
+            "expression": [
+              "",
+              "VAR d = TODAY()",
+              "RETURN",
+              "CALCULATE(",
+              "    [Total Sales Revenue],",
+              "    FILTER(",
+              "        ALL( Dim_Date ),",
+              "        DATEVALUE( Dim_Date[Date] ) = d",
+              "    )",
+              ")"
+            ]
+          },
+          {
+            "name": "-- Sales Growth % (vs previous month) — uses converted dates\nSales Growth %",
+            "expression": [
+              "",
+              "VAR CurrStart = DATE( YEAR( TODAY() ), MONTH( TODAY() ), 1 )",
+              "VAR CurrEnd   = TODAY()",
+              "VAR PrevStart = EOMONTH( TODAY(), -2 ) + 1",
+              "VAR PrevEnd   = EOMONTH( TODAY(), -1 )",
+              "",
+              "VAR CurrMTD =",
+              "    CALCULATE(",
+              "        [Total Sales Revenue],",
+              "        FILTER(",
+              "            ALL( Dim_Date ),",
+              "            DATEVALUE( Dim_Date[Date] ) >= CurrStart",
+              "                && DATEVALUE( Dim_Date[Date] ) <= CurrEnd",
+              "        )",
+              "    )",
+              "",
+              "VAR PrevMonthTotal =",
+              "    CALCULATE(",
+              "        [Total Sales Revenue],",
+              "        FILTER(",
+              "            ALL( Dim_Date ),",
+              "            DATEVALUE( Dim_Date[Date] ) >= PrevStart",
+              "                && DATEVALUE( Dim_Date[Date] ) <= PrevEnd",
+              "        )",
+              "    )",
+              "",
+              "RETURN",
+              "DIVIDE( CurrMTD - PrevMonthTotal, PrevMonthTotal, 0 )"
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[Fact_Restaurant_Transactions].*   FROM [dbo].[Fact_Restaurant_Transactions] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Fact_Restaurant_Transactions"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "6a8d145f-b054-471f-9cc9-1611bf1c1929",
+        "fromTable": "Fact_Restaurant_Transactions",
+        "fromColumn": "Branch_ID",
+        "toTable": "Dim_Branch",
+        "toColumn": "Branch_ID"
+      },
+      {
+        "name": "8c98511b-3c83-4161-b3a8-8632987fc5fc",
+        "fromTable": "Fact_Restaurant_Transactions",
+        "fromColumn": "Competitor_ID",
+        "toTable": "Dim_Competitor",
+        "toColumn": "Competitor_ID"
+      },
+      {
+        "name": "00958aeb-e4e0-409e-84a4-d2b04f495c29",
+        "fromTable": "Fact_Restaurant_Transactions",
+        "fromColumn": "Dim_Customer_ID",
+        "toTable": "Dim_Customer",
+        "toColumn": "Dim_Customer_ID"
+      },
+      {
+        "name": "12041465-a180-405d-b2e9-f5e771a35912",
+        "fromTable": "Fact_Restaurant_Transactions",
+        "fromColumn": "Date_ID",
+        "toTable": "Dim_Date",
+        "toColumn": "Date_ID"
+      },
+      {
+        "name": "9fc74419-0832-405a-92dd-667fceae62bc",
+        "fromTable": "Fact_Restaurant_Transactions",
+        "fromColumn": "Driver_ID",
+        "toTable": "Dim_Driver",
+        "toColumn": "Driver_ID"
+      },
+      {
+        "name": "78560999-ef8c-4035-8b09-898b7230d75d",
+        "fromTable": "Fact_Restaurant_Transactions",
+        "fromColumn": "Time_ID",
+        "toTable": "Dim_Time",
+        "toColumn": "Time_ID"
+      },
+      {
+        "name": "20f35e83-331c-439c-b448-42e5c63d1c23",
+        "fromTable": "Fact_Restaurant_Transactions",
+        "fromColumn": "Weather_ID",
+        "toTable": "Dim_Weather",
+        "toColumn": "Weather_ID"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "400"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
